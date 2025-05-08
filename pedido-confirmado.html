@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pedido recebido - Liquidz</title>
+    </head>
+
+    <body style="margin: 0px; -webkit-text-size-adjust: none;" yahoo="fix">
+
+        <style type="text/css">
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+            body * {
+                font-family: 'Roboto', sans-serif;
+            }
+
+        </style>
+
+        <table width="100%" cellspacing="0" cellpadding="0" align="center" border="0" bgcolor="#FFFFFF">
+
+            <tr>
+                <td>
+
+                    <table cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto; background:#f6f7f8;">
+                        <tr>
+                            <td colspan="2">
+                                <table style="width: 100%; margin: 0 auto; padding: 0 25px;">
+                                    <tr>
+                                        <td align="left" style="padding: 35px 0; border-bottom: 3px solid #ccc;">
+                                            <a target="_blank" href="https://liquidz.com.br/" style="text-decoration: none; max-width: 330px; max-height: 127px; display: inline-block;">
+                                                <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}" width="{{ shop.email_logo_width }}">
+                                            </a>
+                                        </td>
+
+                                        <td align="right" style="padding: 35px 0; border-bottom: 3px solid #ccc; font-size: 14px; font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                            PEDIDO {{ order_name }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" style="padding: 20px 25px 0;">
+                                <h2>Obrigado pela compra ;)</h2>
+                            </td>
+                        </tr>
+                                              {% if attributes['Pix Code'] == blank and attributes['Pix Code'] == 'no_url' %}
+                        <tr>
+                                             
+                            <td colspan="2" style="padding: 0px 25px;">
+                                <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Estamos preparando seu pedido e avisaremos assim que ele for enviado para você!</p>
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                        {% if attributes['Pix Code'] != blank and attributes['Pix Code'] != 'no_url' %}
+              
+                            <tr>
+                              <td colspan="2" style="padding: 0px 25px;">
+                                <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Seu pedido foi criado!
+<strong>Se você já realizou o pagamento via PIX, por favor, aguarde pelo menos 15 minutos para darmos continuidade ao processamento do seu pedido.</strong>
+                                </p>
+                                <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">
+Caso ainda não tenha feito o pagamento via PIX, basta copiar o código abaixo para garantir seu pedido:
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" style="padding: 0px 25px;">
+                                    <a style="color: #000; text-decoration: none; cursor: default;" href="{{ attributes['Pix Code']}}">
+                                        {{ attributes['Pix Code']}}
+                                    </a>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td height="15">&nbsp;</td>
+                            </tr>
+                        {% endif %}
+                       <tr>
+                                             
+                            <td colspan="2" style="padding: 0px 25px;">
+                                <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">⚠️ Lembre-se que seu prazo de entrega só começará a contar a partir da data de postagem da encomenda.</p>
+                               <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Para acompanhar seu pedido através do site, basta criar sua conta com o mesmo endereço de e-mail pelo qual você está recebendo esta mensagem.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="padding: 0px 25px;">
+                                <h3>Detalhes do seu pedido</h3>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" style="padding: 0px 25px;">
+                                <table style="width: 100%; padding: 25px; margin-bottom:20px; background: #fff;">
+                                    {% for line in subtotal_line_items %}
+
+                                        {% if line.product.title %}
+                                            {% assign line_title = line.product.title %}
+                                        {% else %}
+                                            {% assign line_title = line.title %}
+                                        {% endif %}
+
+                                        <tr>
+                                            <td style="margin-bottom: 50px;">
+                                                {% if line.image %}
+                                                    <span style="display:inline-block; margin-right:15px;">
+                                                        <img src="{{ line | img_url: 'compact_cropped' }}" alt="{{ line_title }}" style="width: 80px; height: 80px; margin: 0; padding: 0; display:block; border: 0; font-family: Helvetica, Rebond Grotesque, Calibri, Arial; font-size: 20px; color: #000;background-color: #ccc;">
+                                                    </span>
+                                                {% endif %}
+
+                                                {% if line.product.title %}
+                                                    <div style="display:inline-block;">
+                                                        <p style="margin: 5px 0; font-size: 14px;">
+                                                            {{ line_title }}
+                                                        </p>
+
+                                                        <p style="margin: 5px 0; font-size: 14px;">
+                                                            Quantidade: {{ line.quantity }}
+                                                        </p>
+
+                                                        <p style="margin: 5px 0; font-size: 14px;">
+                                                            {% if line.final_line_price > 0 %}
+                                                                {{ line.final_line_price | money }}
+                                                            {% else %}
+                                                                Grátis
+                                                            {% endif %}
+                                                        </p>
+                                                    </div>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+
+                                    {% endfor %}
+
+                                    <tr>
+                                        <td>
+                                            <h5 style="margin: 0; font-size: 16px; font-weight: bold;">Endereço de entrega</h5>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <p style="margin: 5px 0; font-size:14px; line-height:1.5;">
+                                                <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.name }}</p>
+                                              <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.address1 }}</p>
+                                          <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.address2 }}</p>
+                                          <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.city }} {{shipping_address.province_code}}</p>
+                                          <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.zip }}</p>
+                                          <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.country }}</p>
+                                            </p>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                <a href="{{ order_status_url }}" style="background:#59EF80; color:#000; font-size:14px; font-weight:bold; padding: 10px 16px; border-radius: 20px; text-decoration: none;">
+                                                    Acompanhar pedido 🔥
+                                                </a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" style="padding: 0px 25px;">
+                                <h3>Resumo do pedido</h3>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" style="padding: 0px 25px;">
+                                <table style="width: 100%; padding: 20px; background: #fff;">
+                                    <tr>
+                                        <td align="left" style="vertical-align:top; width: 50%;">
+                                            <p>Subtotal</p>
+                                        </td>
+
+                                        <td align="right" style="vertical-align:top; width: 50%;">
+                                           <p>{{ subtotal_price | plus: total_order_discount_amount | money }}</p>
+                                        </td>
+                                    </tr>
+
+                                    {% for discount_application in discount_applications %}
+                                        <tr>
+                                            <td align="left" style="vertical-align:top; width: 50%;">
+                                                <p>Desconto</p>
+                                            </td>
+
+                                            <td align="right" style="vertical-align:top; width: 50%;">
+                                                <p style="color:#f00;">-{{ discount_application.total_allocated_amount | money_with_currency }}</p>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    <tr>
+                                        <td align="left" style="vertical-align:top; width: 50%;">
+                                            <p>Entrega</p>
+                                        </td>
+
+                                        <td align="right" style="vertical-align:top; width: 50%;">
+                                            <p>{{ shipping_price | money }}</p>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left" style="vertical-align:top; width: 50%;">
+                                            <p><b>Total</b></p>
+                                        </td>
+
+                                        <td align="right" style="vertical-align:top; width: 50%;">
+                                            <p>
+                                                <b>
+                                                    {{ total_price | money_with_currency }}
+                                                </b>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" style="padding: 25px 25px;">
+                                <table style="width: 100%; padding: 20px; background: #fff;">
+                                    <tr>
+                                        <td align="left" style="vertical-align:top; width: 50%;">
+                                            <h4 style="margin: 0 0 5px;">Seu número do pedido</h4>
+
+                                            <h5 style="margin: 0 0 20px;">
+                                                <a href="{{ order_status_url }}" style="color:#000;font-size:14px;font-weight:bold;text-decoration:underline;">{{ order_name }}</a>
+                                            </h5>
+
+                                            <h4 style="margin: 0 0 5px; font-size: 14px; font-weight: bold;">
+                                                Data do pedido
+                                            </h4>
+
+                                            <h5 style="margin: 0 0 20px; font-size: 14px; font-weight: bold;">
+                                                {{ created_at | date: "%d.%m.%Y" }}
+                                            </h5>
+
+                                            <h4 style="margin: 0 0 5px; font-size: 14px; font-weight: bold;">
+                                                Método de pagamento
+                                            </h4>
+
+                                            <h5 style="margin: 0 0 30px; font-size: 14px; font-weight: bold;">
+                                                {% for transaction in transactions %}
+                                                    {% if transaction.status == "success" or transaction.status == "pending" %}
+                                                        {% if transaction.kind == "authorization" or transaction.kind == "sale" %}
+                                                            
+                                                                {% if transaction.payment_details.credit_card_company %}
+                                                                    
+                                                                    {% capture credit_card_url %}notifications/{{ transaction.payment_details.credit_card_company | downcase | replace: " ", "_" }}.png{% endcapture %}
+
+                                                                    <img src="{{ credit_card_url | shopify_asset_url }}" class="customer-info__item-credit" width="35" style="margin: 0; padding: 0; border: 0; display:block; border: 0; font-family: Helvetica, Rebond Grotesque, Calibri, Arial; font-size: 20px; color: #000;background-color: transparent;">
+
+                                                                    <span style="display:block; margin: 0 0 5px; font-size: 14px; font-weight: bold;">
+                                                                        {{ transaction.amount | money }}
+                                                                    </span>
+                                                                    
+
+                                                                {% else %}
+
+                                                                    <span style="display:block; margin: 0 0 5px; font-size: 14px; font-weight: bold;">
+                                                                        {{ transaction.gateway | replace: "_", " " | capitalize | remove: 'Cartpanda' | remove: 'cartpanda' }}
+                                                                    <span>
+
+                                                                    <span style="display:block; margin: 0 0 5px; font-size: 14px; font-weight: bold;">
+                                                                        {{ transaction.amount | money }}
+                                                                    </span>
+
+                                                                {% endif %}
+                                                            
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </h5>
+
+                                            <h4 style="margin: 0 0 5px; font-size: 14px; font-weight: bold;">
+                                                Método de entrega
+                                            </h4>
+
+                                            <h5 style="margin: 0 0 20px; font-size: 14px; font-weight: bold;">
+                                                {{ shipping_method.title | remove: ' - Cartpanda' }}
+                                                <!-- Em até 7 dias úteis -->
+                                            </h5>
+                                        </td>
+
+                                        <td align="left" style="vertical-align:top; width: 50%;">
+                                            <h4 style="margin: 0 0 5px;">Endereço de entrega</h4>
+
+                                            <p style="margin: 0 0 20px; font-size: 14px; line-height: 1.5;">
+                                                <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.name }}</p>
+                                              <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.address1 }}</p>
+                                          <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.address2 }}</p>
+                                          <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.city }} {{shipping_address.province_code}}</p>
+                                          <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.zip }}</p>
+                                          <p style="margin: 0; font-size: 14px; line-height: 1.5;">{{ shipping_address.country }}</p>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!--
+                        <tr>
+                            <td colspan="2" style="padding:0 25px 25px; text-align:center;">
+                                
+                                <a href="https://liquidz.com.br/pages/contato" style="text-decoration:none; display:inline-block; width:23%;">
+                                    <span style="display:inline-block; padding:0 5px;">
+                                        <img src="https://cdn.shopify.com/s/files/1/0837/5153/4895/files/box-pagamento-email-transacional.png?v=1705877003" style="width:100%; height:auto; vertical-align:middle;">
+                                    </span>
+                                </a>
+
+                                <a href="https://liquidz.com.br/pages/contato" style="text-decoration:none; display:inline-block; width:23%;">
+                                    <span style="display:inline-block; padding:0 5px;">
+                                        <img src="https://cdn.shopify.com/s/files/1/0837/5153/4895/files/box-servico-ao-cliente-transacional.png?v=1705877003" style="width:100%; height:auto; vertical-align:middle;">
+                                    </span>
+                                </a>
+
+                                <a href="https://liquidz.com.br/pages/contato" style="text-decoration:none; display:inline-block; width:23%;">
+                                    <span style="display:inline-block; padding:0 5px;">
+                                        <img src="https://cdn.shopify.com/s/files/1/0837/5153/4895/files/box-devolucao-email-transacional.png?v=1705877003" style="width:100%; height:auto; vertical-align:middle;">
+                                    </span>
+                                </a>
+
+                                <a href="https://liquidz.com.br/pages/contato" style="text-decoration:none; display:inline-block; width:23%;">
+                                    <span style="display:inline-block; padding:0 5px;">
+                                        <img src="https://cdn.shopify.com/s/files/1/0837/5153/4895/files/box-entrega-email-transacional.png?v=1705877003" style="width:100%; height:auto; vertical-align:middle;">
+                                    </span>
+                                </a>
+
+                            </td>
+                        </tr>
+                        -->
+
+                        <tr>
+                            <td colspan="2">
+                                
+                                <table style="width:100%; background:#323239; text-align:center; padding: 30px 25px;">
+                                    <tr>
+                                        <td>
+                                            <p style="margin-bottom: 30px;">
+                                                <img src="https://cdn.shopify.com/s/files/1/0837/5153/4895/files/logo-liquidz-footer-email-transacional.png?v=1705876686" style="max-width: 100px; height: auto; vertical-align: middle;">    
+                                            </p>
+
+                                            <p style="color: #A5A8B5; font-size: 14px; line-height: 1.5;">
+                                                Se você tiver alguma dúvida, responda a esta mensagem ou entre em contato conosco pelo e‑mail <a href="mailto:pedidos@liquidz.com.br" style="color:#A5A8B5;">pedidos@liquidz.com.br</a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+
+            </tr>
+            
+        </table>
+
+    </body>
+
+</html>
