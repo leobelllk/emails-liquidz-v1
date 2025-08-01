@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIQUIDZ - Cancelamento da Assinatura</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f8f6f3; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <!-- Container Principal -->
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+        
+        <!-- Header com Logo -->
+        <div style="background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%); padding: 40px 30px 30px; text-align: center; border-bottom: 3px solid #87DD00;">
+            <img src="https://cdn.shopify.com/s/files/1/0837/5153/4895/files/Nova_logo_LIQUIDZ_-_Black.png?v=1750731994" 
+                 alt="LIQUIDZ" 
+                 style="width: 180px; height: auto; margin-bottom: 20px;">
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div style="padding: 40px 30px;">
+            
+            <!-- Saudação -->
+            <div style="margin-bottom: 30px;">
+                <h2 style="color: #32302f; font-size: 18px; font-weight: 600; margin: 0 0 8px 0; line-height: 1.4;">
+                    Olá, ##customer_name##!
+                </h2>
+                <p style="color: #32302f; font-size: 16px; font-weight: 500; margin: 0; line-height: 1.5;">
+                    Conforme sua solicitação, cancelamos as futuras cobranças referentes ao pedido de compra abaixo.
+                </p>
+            </div>
+
+            <!-- Informações do Cancelamento -->
+            <div style="background-color: #f8f6f3; border-radius: 12px; padding: 25px; margin: 30px 0; border-left: 4px solid #87DD00;">
+                <h3 style="color: #32302f; font-size: 16px; font-weight: 600; margin: 0 0 20px 0; text-align: center;">
+                    ❌ Detalhes do Cancelamento
+                </h3>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0;">
+                    <span style="color: #666; font-weight: 500; font-size: 14px;">Número do pedido:</span>
+                    <span style="color: #32302f; font-weight: 600; font-size: 14px;">##order##</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0;">
+                    <span style="color: #666; font-weight: 500; font-size: 14px;">Produto:</span>
+                    <span style="color: #32302f; font-weight: 600; font-size: 14px; text-align: right; max-width: 60%;">##product_name##</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0;">
+                    <span style="color: #666; font-weight: 500; font-size: 14px;">Valor:</span>
+                    <span style="color: #32302f; font-weight: 700; font-size: 16px;">R$ ##amount_brl##</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0;">
+                    <span style="color: #666; font-weight: 500; font-size: 14px;">Frequência:</span>
+                    <span style="color: #32302f; font-weight: 600; font-size: 14px;">##rule_frequency##</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #666; font-weight: 500; font-size: 14px;">Forma de pagamento:</span>
+                    <span style="color: #32302f; font-weight: 600; font-size: 14px;">##payment_method##</span>
+                </div>
+            </div>
+
+            <!-- Aviso de Cancelamento -->
+            <div style="background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 20px; margin: 30px 0; text-align: center;">
+                <p style="color: #856404; font-size: 14px; margin: 0; line-height: 1.5;">
+                    ⚠️ <strong>ATENÇÃO:</strong> Sua assinatura foi cancelada com sucesso. Não haverá mais cobranças futuras.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div style="background-color: #f8f6f3; padding: 30px; text-align: center; border-top: 1px solid #e0e0e0;">
+            
+            <!-- Contato -->
+            <div style="margin-bottom: 25px;">
+                <p style="color: #666; font-size: 14px; margin: 0 0 10px 0;">
+                    Em caso de dúvidas, entre em contato conosco:
+                </p>
+                <a href="mailto:pedidos@liquidz.com.br" 
+                   style="color: #32302f; font-size: 16px; font-weight: 600; text-decoration: none;">
+                    📧 pedidos@liquidz.com.br
+                </a>
+            </div>
+
+            <!-- Assinatura -->
+            <div style="margin-bottom: 25px;">
+                <p style="color: #32302f; font-size: 14px; margin: 0 0 15px 0;">
+                    Atenciosamente,
+                </p>
+                <img src="https://cdn.shopify.com/s/files/1/0837/5153/4895/files/Nova_logo_LIQUIDZ_-_Black.png?v=1750731994" 
+                     alt="LIQUIDZ" 
+                     style="width: 120px; height: auto;">
+            </div>
+
+            <!-- Processador de Pagamento -->
+            <div style="border-top: 1px solid #e0e0e0; padding-top: 20px;">
+                <p style="color: #999; font-size: 11px; margin: 0; line-height: 1.4;">
+                    Pagamento processado por 
+                    <a href="https://www.pagbrasil.com" 
+                       target="_blank" 
+                       rel="noopener"
+                       style="color: #999; text-decoration: none;">
+                        PagBrasil Pagamentos Eletrônicos Ltda
+                    </a>. 
+                    Porto Alegre/RS - Brasil
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html> 
