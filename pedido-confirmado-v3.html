@@ -15,7 +15,20 @@
 {% capture email_body %}
   {% if has_pending_payment %}
     {% if buyer_action_required %}
-      Você receberá um e-mail de confirmação após concluir o pagamento.
+            {% assign pix_code = attributes['payment_additional_pix_code'] | default: order.attributes['payment_additional_pix_code'] | default: note_attributes['payment_additional_pix_code'] | default: order.note_attributes['payment_additional_pix_code'] | default: attributes['pix_code'] | default: order.note_attributes['pix_code'] | default: note_attributes['pix_code'] %}
+      {% if pix_code == blank or pix_code == 'no_url' %}
+        Estamos preparando seu pedido e avisaremos assim que ele for enviado para você!
+        {% endif %}
+        {% if pix_code != blank and pix_code != 'no_url' %}
+            <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Seu pedido foi criado!</p>
+            <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Se você já realizou o pagamento via PIX, por favor, aguarde pelo menos 15 minutos para darmos continuidade ao processamento do seu pedido.</p>
+            <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Caso ainda não tenha feito o pagamento via PIX, basta copiar o código abaixo para garantir seu pedido:</p>
+            <a style="color: #000; text-decoration: none; cursor: default;" href="{{ attributes['payment_additional_pix_code']}}">
+                {{ attributes['payment_additional_pix_code']}}
+            </a>
+            <p>⚠️ Lembre-se que seu prazo de entrega só começará a contar a partir da data de postagem da encomenda.</p>
+            <p>Para acompanhar seu pedido através do site, basta criar sua conta com o mesmo endereço de e-mail pelo qual você está recebendo esta mensagem.</p>
+        {% endif %}
     {% else %}
       O pagamento está sendo processado, e você receberá um e-mail quando o pedido for confirmado.
     {% endif %}
@@ -27,20 +40,21 @@
         {% when 'local' %}
           Olá, {{ customer.first_name }}! Estamos preparando seu pedido para entrega.
         {% else %}
-            {% if attributes['Pix Code'] == blank or attributes['Pix Code'] == 'no_url' %}
-            Estamos preparando seu pedido e avisaremos assim que ele for enviado para você!
-            {% endif %}
-            {% if attributes['Pix Code'] != blank and attributes['Pix Code'] != 'no_url' and %}
-                <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Seu pedido foi criado!</p>
-                <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Se já realizou o pagamento via PIX, receberá um e-mail de confirmação do pagamento.</p>
-                <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Caso ainda não tenha feito o pagamento via PIX, basta copiar o código abaixo para garantir seu pedido:</p>
-                <a style="color: #000; text-decoration: none; cursor: default;" href="{{ attributes['Pix Code']}}">
-                    {{ attributes['Pix Code']}}
-                </a>
-<br>
-                <p>⚠️ Lembre-se que seu prazo de entrega só começará a contar a partir da data de postagem da encomenda.</p>
-                <p>Para acompanhar seu pedido através do site, basta criar sua conta com o mesmo endereço de e-mail pelo qual você está recebendo esta mensagem.</p>
-            {% endif %}
+            {% assign pix_code_alt = attributes['payment_additional_pix_code'] | default: order.attributes['payment_additional_pix_code'] | default: note_attributes['payment_additional_pix_code'] | default: order.note_attributes['payment_additional_pix_code'] | default: attributes['pix_code'] | default: order.note_attributes['pix_code'] | default: note_attributes['pix_code'] %}
+            
+            {% if pix_code_alt == blank or pix_code_alt == 'no_url' %}
+        Estamos preparando seu pedido e avisaremos assim que ele for enviado para você!
+        {% endif %}
+        {% if pix_code_alt != blank and pix_code_alt != 'no_url' %}
+            <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Seu pedido foi criado!</p>
+            <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Se você já realizou o pagamento via PIX, por favor, aguarde pelo menos 15 minutos para darmos continuidade ao processamento do seu pedido.</p>
+            <p style="margin:0 0 15px; font-size:16px; line-height:1.5;">Caso ainda não tenha feito o pagamento via PIX, basta copiar o código abaixo para garantir seu pedido:</p>
+            <a style="color: #000; text-decoration: none; cursor: default;" href="{{ pix_code_alt}}">
+                {{ pix_code_alt}}
+            </a>
+            <p>⚠️ Lembre-se que seu prazo de entrega só começará a contar a partir da data de postagem da encomenda.</p>
+            <p>Para acompanhar seu pedido através do site, basta criar sua conta com o mesmo endereço de e-mail pelo qual você está recebendo esta mensagem.</p>
+        {% endif %}
       {% endcase %}
         {% if delivery_instructions != blank  %}
           <p><b>Detalhes da entrega:</b> {{ delivery_instructions }}</p>
@@ -84,7 +98,6 @@
   <style>
     .button__cell {background-color: #9bdb20 !important; border-radius: 200px; }
     a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
-  @media (color-scheme: dark) {
     .body {
       background: #f8f6f3 !important;
     }
@@ -102,8 +115,7 @@
 
         .disclaimer__subtext a {
           color: grey !important;
-        }
-     }   
+        } 
   </style>
 </head>
 
